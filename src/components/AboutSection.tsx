@@ -1,12 +1,21 @@
 import aboutPhoto from "@/assets/about-photo.png";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const AboutSection = () => {
+  const { ref: imgRef, isVisible: imgVisible } = useScrollReveal();
+  const { ref: textRef, isVisible: textVisible } = useScrollReveal(0.2);
+
   return (
     <section className="relative py-24 md:py-32 bg-background">
       <div className="container mx-auto px-6 md:px-12 max-w-6xl">
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           {/* Image */}
-          <div className="relative group">
+          <div
+            ref={imgRef}
+            className={`relative group transition-all duration-1000 ${
+              imgVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-16"
+            }`}
+          >
             <div className="absolute -inset-1 rounded-sm bg-gradient-to-br from-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <img
               src={aboutPhoto}
@@ -16,7 +25,12 @@ const AboutSection = () => {
           </div>
 
           {/* Text */}
-          <div>
+          <div
+            ref={textRef}
+            className={`transition-all duration-1000 delay-200 ${
+              textVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-16"
+            }`}
+          >
             <h2 className="font-heading text-3xl md:text-4xl text-gold tracking-cinematic mb-8">
               About The Artist
             </h2>
