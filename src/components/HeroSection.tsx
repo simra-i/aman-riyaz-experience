@@ -1,4 +1,4 @@
-
+import heroImage from "@/assets/hero-guitar.png";
 
 const HeroSection = () => {
   return (
@@ -12,6 +12,15 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 flex flex-col items-center text-center px-4">
+        {/* Artist Image */}
+        <div className="relative w-[320px] md:w-[420px] lg:w-[480px] mb-8 animate-fade-in">
+          <img
+            src={heroImage}
+            alt="Aman Riyaz holding a guitar"
+            className="w-full h-auto object-contain drop-shadow-2xl"
+          />
+        </div>
+
         {/* Name */}
         <h1
           className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold tracking-cinematic gradient-gold-text animate-fade-in-up"
