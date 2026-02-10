@@ -1,12 +1,20 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 const LatestReleaseSection = () => {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <section className="relative py-24 md:py-32 bg-cosmos">
-      <div className="container mx-auto px-6 md:px-12 max-w-6xl text-center">
+      <div
+        ref={ref}
+        className={`container mx-auto px-6 md:px-12 max-w-6xl text-center transition-all duration-1000 ${
+          isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        }`}
+      >
         <h2 className="font-heading text-3xl md:text-4xl text-gold tracking-cinematic mb-12">
           Latest Release
         </h2>
 
-        {/* YouTube Embed */}
         <div className="w-full max-w-5xl mx-auto aspect-video mb-12">
           <iframe
             className="w-full h-full rounded-sm shadow-2xl"
@@ -17,7 +25,6 @@ const LatestReleaseSection = () => {
           />
         </div>
 
-        {/* Spotify Button */}
         <a
           href="https://open.spotify.com"
           target="_blank"
