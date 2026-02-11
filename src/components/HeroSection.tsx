@@ -23,7 +23,7 @@ const HeroSection = () => {
 
         {/* Name */}
         <h1
-          className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold tracking-cinematic gradient-gold-text animate-fade-in-up"
+          className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold tracking-ultra gradient-gold-text animate-fade-in-up"
           style={{ animationDelay: "0.3s", opacity: 0 }}
         >
           AMAN RIYAZ
