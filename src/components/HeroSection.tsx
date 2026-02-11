@@ -2,12 +2,31 @@ import heroImage from "@/assets/hero-guitar.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero">
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-gold/20 animate-pulse"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+              animationDelay: `${i * 0.7}s`,
+              animationDuration: `${3 + i * 0.5}s`,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Radial glow behind artist */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div
-          className="w-[600px] h-[600px] rounded-full opacity-30 blur-3xl"
-          style={{ background: "radial-gradient(circle, hsl(345 60% 25%) 0%, transparent 70%)" }}
+          className="w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-pulse"
+          style={{
+            background: "radial-gradient(circle, hsl(345 60% 25%) 0%, transparent 70%)",
+            animationDuration: "4s",
+          }}
         />
       </div>
 
@@ -17,7 +36,7 @@ const HeroSection = () => {
           <img
             src={heroImage}
             alt="Aman Riyaz holding a guitar"
-            className="w-full h-auto object-contain drop-shadow-2xl"
+            className="w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
           />
         </div>
 
@@ -36,6 +55,16 @@ const HeroSection = () => {
         >
           INDIAN POP ARTIST
         </h2>
+
+        {/* Scroll indicator */}
+        <div
+          className="mt-16 animate-fade-in-up"
+          style={{ animationDelay: "1.2s", opacity: 0 }}
+        >
+          <div className="w-6 h-10 border-2 border-gold/40 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-gold/60 rounded-full mt-2 animate-bounce" />
+          </div>
+        </div>
       </div>
 
       {/* Bottom fade */}

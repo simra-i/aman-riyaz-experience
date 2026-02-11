@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useToast } from "@/hooks/use-toast";
+
+const FORMSPREE_ID = "YOUR_FORMSPREE_ID"; // Replace with your Formspree form ID
 
 const countryCodes = [
   { code: "+91", label: "🇮🇳 +91" },
@@ -24,15 +27,49 @@ const NewsletterSection = () => {
   const [email, setEmail] = useState("");
   const [countryCode, setCountryCode] = useState("+91");
   const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const { ref, isVisible } = useScrollReveal();
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Newsletter signup:", { name, email, phone: `${countryCode}${phone}` });
+    setSubmitting(true);
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: `${countryCode}${phone}`,
+        }),
+      });
+
+      if (res.ok) {
+        toast({
+          title: "Welcome to the Circle ✦",
+          description: "You'll be the first to know about new releases.",
+        });
+        setName("");
+        setEmail("");
+        setPhone("");
+      } else {
+        throw new Error("Submission failed");
+      }
+    } catch {
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <section className="relative py-24 md:py-32 bg-background">
+    <section id="contact" className="relative py-24 md:py-32 bg-background">
       <div
         ref={ref}
         className={`container mx-auto px-6 md:px-12 max-w-2xl text-center transition-all duration-1000 ${
@@ -87,9 +124,10 @@ const NewsletterSection = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-10 py-4 bg-gold text-primary-foreground font-heading text-sm tracking-cinematic hover:bg-gold-light transition-colors duration-500"
+            disabled={submitting}
+            className="w-full px-10 py-4 bg-gold text-primary-foreground font-heading text-sm tracking-cinematic hover:bg-gold-light transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            JOIN THE CIRCLE
+            {submitting ? "SUBMITTING..." : "JOIN THE CIRCLE"}
           </button>
         </form>
       </div>
