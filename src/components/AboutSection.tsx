@@ -6,7 +6,10 @@ const AboutSection = () => {
   const { ref: textRef, isVisible: textVisible } = useScrollReveal(0.2);
 
   return (
-    <section className="relative py-24 md:py-32 bg-background">
+    <section id="about" className="relative py-24 md:py-32 bg-background overflow-hidden">
+      {/* Decorative line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-gold/30 to-transparent" />
+
       <div className="container mx-auto px-6 md:px-12 max-w-6xl">
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           {/* Image */}
@@ -20,7 +23,7 @@ const AboutSection = () => {
             <img
               src={aboutPhoto}
               alt="Aman Riyaz close-up portrait with sunglasses"
-              className="w-full rounded-sm shadow-2xl"
+              className="w-full rounded-sm shadow-2xl group-hover:scale-[1.02] transition-transform duration-700"
             />
           </div>
 
