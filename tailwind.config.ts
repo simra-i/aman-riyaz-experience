@@ -93,6 +93,10 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        "fog-drift": {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
